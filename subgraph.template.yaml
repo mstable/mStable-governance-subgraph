@@ -1,0 +1,7 @@
+specVersion: 0.0.2
+description: mStable Governance
+repository: https://github.com/mstable/mStable-governance-subgraph
+schema:
+  file: ./schema.graphql
+
+# TODO
