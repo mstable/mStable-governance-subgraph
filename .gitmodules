@@ -1,0 +1,3 @@
+[submodule "lib/mStable-contracts"]
+	path = lib/mStable-contracts
+	url = git@github.com:mstable/mstable-contracts.git
