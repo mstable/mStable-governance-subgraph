@@ -21,6 +21,16 @@ export function getOrCreateIncentivisedVotingLockup(
 
     let stakingTokenAddress = contract.stakingToken()
 
+    let tokenEntity = getOrCreateToken(address)
+    tokenEntity.address = address
+    tokenEntity.name = contract.name()
+    tokenEntity.symbol = contract.symbol()
+    tokenEntity.decimals = contract.decimals().toI32()
+    tokenEntity.totalSupply = contract.totalSupply()
+    tokenEntity.save()
+
+    entity.votingToken = tokenEntity.address.toHexString()
+
     entity.duration = contract.getDuration()
     entity.periodFinish = contract.periodFinish().toI32()
     entity.lastUpdateTime = contract.lastUpdateTime().toI32()
@@ -60,6 +70,10 @@ export function updateLockupGlobals(
   entity.rewardPerTokenStored = contract.rewardPerTokenStored()
   entity.totalStakingRewards = entity.rewardRate.times(entity.duration)
   entity.totalStaticWeight = contract.totalStaticWeight()
+
+  let tokenEntity = getOrCreateToken(address)
+  tokenEntity.totalSupply = contract.totalSupply()
+  tokenEntity.save()
 
   entity.save()
 

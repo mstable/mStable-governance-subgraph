@@ -17,6 +17,20 @@ type UserLockup @entity {
   bias: BigInt!
 }
 
+type Token @entity {
+  id: ID!
+
+  address: Bytes!
+
+  decimals: Int!
+
+  name: String!
+
+  symbol: String!
+
+  totalSupply: BigInt!
+}
+
 type IncentivisedVotingLockup @entity {
   id: ID!
 
@@ -27,6 +41,8 @@ type IncentivisedVotingLockup @entity {
 
   stakingBalances: [StakingBalance!]!
     @derivedFrom(field: "incentivisedVotingLockup")
+
+  votingToken: Token!
 
   end: BigInt!
 
@@ -89,20 +105,6 @@ type StakingBalance @entity {
   incentivisedVotingLockup: IncentivisedVotingLockup!
 
   amount: BigInt!
-}
-
-type Token @entity {
-  id: ID!
-
-  address: Bytes!
-
-  decimals: Int!
-
-  name: String!
-
-  symbol: String!
-
-  totalSupply: BigInt!
 }
 
 enum LockAction {
