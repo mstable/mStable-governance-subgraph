@@ -1,6 +1,6 @@
 {
   "network": "kovan",
-  "address_IncentivisedVotingLockup": "0xf35c9a1806e78f6f3778d7f8e634cd27309cf53b",
+  "address_IncentivisedVotingLockup": "0x0c78e59eeadf2aed77ff5e7b154c9cbc9bce5c3f",
   "startBlock_IncentivisedVotingLockup": 20834108,
   "address_RewardsDistributor": "0x1Fd01345794b162eCF3b69fFF2231B34d1994371",
   "startBlock_RewardsDistributor": 20834108

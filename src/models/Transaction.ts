@@ -107,8 +107,7 @@ export function getOrCreateClaimTransaction(
 
 export function handleDepositTransaction(event: Deposit): void {
   switch (event.params.action as LockAction) {
-    case LockAction.CREATE_LOCK:
-    case LockAction.DEPOSIT_FOR: {
+    case LockAction.CREATE_LOCK: {
       getOrCreateCreateLockTransaction(event)
       return
     }

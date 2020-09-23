@@ -1,5 +1,4 @@
 export enum LockAction {
-  DEPOSIT_FOR,
   CREATE_LOCK,
   INCREASE_LOCK_AMOUNT,
   INCREASE_LOCK_TIME,
@@ -7,8 +6,6 @@ export enum LockAction {
 
 export function mapLockAction(value: i32): string {
   switch (value as LockAction) {
-    case LockAction.DEPOSIT_FOR:
-      return 'DEPOSIT_FOR'
     case LockAction.CREATE_LOCK:
       return 'CREATE_LOCK'
     case LockAction.INCREASE_LOCK_AMOUNT:

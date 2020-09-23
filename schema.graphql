@@ -28,6 +28,8 @@ type IncentivisedVotingLockup @entity {
   stakingBalances: [StakingBalance!]!
     @derivedFrom(field: "incentivisedVotingLockup")
 
+  end: BigInt!
+
   periodFinish: Int!
 
   lastUpdateTime: Int!
@@ -69,6 +71,8 @@ type StakingReward @entity {
 
   amount: BigInt!
 
+  rewardsPaid: BigInt!
+
   amountPerTokenPaid: BigInt!
 
   account: Bytes!
@@ -102,7 +106,6 @@ type Token @entity {
 }
 
 enum LockAction {
-  DEPOSIT_FOR
   CREATE_LOCK
   INCREASE_LOCK_AMOUNT
   INCREASE_LOCK_TIME
