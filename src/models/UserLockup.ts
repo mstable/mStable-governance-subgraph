@@ -50,6 +50,8 @@ export function depositUserLockup(event: Deposit): UserLockup {
   let newValue =
     event.params.action == LockAction.INCREASE_LOCK_AMOUNT
       ? userLockup.value.plus(event.params.value)
+      : event.params.action == LockAction.INCREASE_LOCK_TIME
+      ? userLockup.value
       : event.params.value
 
   userLockup.value = newValue
