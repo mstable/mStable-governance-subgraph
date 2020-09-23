@@ -1,10 +1,12 @@
 import { Address, BigInt } from '@graphprotocol/graph-ts'
 
 import { UserLockup } from '../../generated/schema'
+import { decreaseTotalValue } from './IncentivisedVotingLockup'
 import {
   IncentivisedVotingLockup as IncentivisedVotingLockupContract,
   Deposit,
   Withdraw,
+  Ejected,
 } from '../../generated/IncentivisedVotingLockup/IncentivisedVotingLockup'
 import { LockAction } from '../utils'
 
@@ -21,7 +23,7 @@ export function getOrCreateUserLockup(
   }
 
   {
-    let entity = new UserLockup(address.toHexString())
+    let entity = new UserLockup(address.toHexString() + account.toHexString())
 
     entity.incentivisedVotingLockup = address.toHexString()
     entity.account = account
@@ -48,6 +50,8 @@ export function depositUserLockup(event: Deposit): UserLockup {
   let newValue =
     event.params.action == LockAction.INCREASE_LOCK_AMOUNT
       ? userLockup.value.plus(event.params.value)
+      : event.params.action == LockAction.INCREASE_LOCK_TIME
+      ? userLockup.value
       : event.params.value
 
   userLockup.value = newValue
@@ -65,6 +69,25 @@ export function withdrawUserLockup(event: Withdraw): UserLockup {
   let userLockup = getOrCreateUserLockup(event.address, event.params.provider)
 
   let contract = IncentivisedVotingLockupContract.bind(event.params.provider)
+
+  let point = contract.getLastUserPoint(userLockup.account as Address)
+
+  userLockup.value = BigInt.fromI32(0)
+  userLockup.slope = point.value1
+  userLockup.bias = point.value0
+  userLockup.ts = point.value2
+
+  userLockup.save()
+
+  return userLockup
+}
+
+export function resetUserLockup(event: Ejected): UserLockup {
+  let userLockup = getOrCreateUserLockup(event.address, event.params.ejected)
+
+  decreaseTotalValue(event.address, userLockup.value)
+
+  let contract = IncentivisedVotingLockupContract.bind(event.params.ejected)
 
   let point = contract.getLastUserPoint(userLockup.account as Address)
 

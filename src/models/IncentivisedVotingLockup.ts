@@ -34,6 +34,7 @@ export function getOrCreateIncentivisedVotingLockup(
 
     entity.rewardsDistributor = contract.rewardsDistributor().toHexString()
     entity.globalEpoch = contract.globalEpoch()
+    entity.end = contract.END()
     entity.expired = contract.expired()
     entity.maxTime = contract.MAXTIME()
     entity.totalStaticWeight = contract.totalStaticWeight()

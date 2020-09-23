@@ -19,6 +19,7 @@ export function getOrCreateStakingReward(
   entity.incentivisedVotingLockup = address.toHexString()
   entity.account = account
   entity.amount = BigInt.fromI32(0)
+  entity.rewardsPaid = BigInt.fromI32(0)
   entity.amountPerTokenPaid = BigInt.fromI32(0)
 
   entity.save()
@@ -36,6 +37,7 @@ export function updateStakingReward(
     let entity = getOrCreateStakingReward(address, account)
 
     entity.amount = contract.rewards(account)
+    entity.rewardsPaid = contract.rewardsPaid(account)
 
     let userRewardPerTokenPaid = contract.userRewardPerTokenPaid(account)
     let rewardPerTokenStored = contract.rewardPerTokenStored()

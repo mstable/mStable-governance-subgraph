@@ -12,7 +12,11 @@ import {
   increaseTotalValue,
   decreaseTotalValue,
 } from '../models/IncentivisedVotingLockup'
-import { withdrawUserLockup, depositUserLockup } from '../models/UserLockup'
+import {
+  withdrawUserLockup,
+  depositUserLockup,
+  resetUserLockup,
+} from '../models/UserLockup'
 import { updateStakingReward } from '../models/StakingReward'
 import { updateStakingBalance } from '../models/StakingBalance'
 import {
@@ -53,9 +57,7 @@ export function handleEjected(event: Ejected): void {
   updateStakingBalance(event.address, event.params.ejected)
 
   // Waiting on this function to be completed on the contract
-  // TODO?
-  //  resetUserLockup(event)
-  //  decreaseTotalValue(event.address, event.params.value)
+  resetUserLockup(event)
 
   getOrCreateEjectTransaction(event)
 }

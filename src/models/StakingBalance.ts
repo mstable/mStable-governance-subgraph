@@ -36,7 +36,7 @@ export function updateStakingBalance(
 
   let contract = IncentivisedVotingLockupContract.bind(address)
 
-  entity.amount = contract.staticBalanceOf(address)
+  entity.amount = contract.staticBalanceOf(account)
 
   entity.save()
 
