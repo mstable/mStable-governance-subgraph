@@ -1,3 +1,7 @@
 {
-  "network": "mainnet"
+  "network": "mainnet",
+  "address_IncentivisedVotingLockup": "0xae8bc96da4f9a9613c323478be181fdb2aa0e1bf",
+  "startBlock_IncentivisedVotingLockup": 10932373,
+  "address_RewardsDistributor": "0x04dfdfa471b79cc9e6e8c355e6c71f8ec4916c50",
+  "startBlock_RewardsDistributor": 10585670
 }
