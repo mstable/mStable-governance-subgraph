@@ -1,5 +1,4 @@
 import { Address, BigInt } from '@graphprotocol/graph-ts'
-
 import { UserLockup } from '../../generated/schema'
 import { decreaseTotalValue } from './IncentivisedVotingLockup'
 import {
@@ -68,7 +67,7 @@ export function depositUserLockup(event: Deposit): UserLockup {
 export function withdrawUserLockup(event: Withdraw): UserLockup {
   let userLockup = getOrCreateUserLockup(event.address, event.params.provider)
 
-  let contract = IncentivisedVotingLockupContract.bind(event.params.provider)
+  let contract = IncentivisedVotingLockupContract.bind(event.address)
 
   let point = contract.getLastUserPoint(userLockup.account as Address)
 
@@ -87,7 +86,7 @@ export function resetUserLockup(event: Ejected): UserLockup {
 
   decreaseTotalValue(event.address, userLockup.value)
 
-  let contract = IncentivisedVotingLockupContract.bind(event.params.ejected)
+  let contract = IncentivisedVotingLockupContract.bind(event.address)
 
   let point = contract.getLastUserPoint(userLockup.account as Address)
 

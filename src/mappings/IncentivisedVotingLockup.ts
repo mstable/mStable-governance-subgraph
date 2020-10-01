@@ -53,11 +53,10 @@ export function handleWithdraw(event: Withdraw): void {
 export function handleEjected(event: Ejected): void {
   updateLockupGlobals(event.address)
 
+  resetUserLockup(event)
+
   updateStakingReward(event.address, event.params.ejected)
   updateStakingBalance(event.address, event.params.ejected)
-
-  // Waiting on this function to be completed on the contract
-  resetUserLockup(event)
 
   getOrCreateEjectTransaction(event)
 }
