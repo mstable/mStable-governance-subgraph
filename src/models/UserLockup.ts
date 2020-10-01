@@ -74,6 +74,7 @@ export function withdrawUserLockup(event: Withdraw): UserLockup {
   let point = contract.getLastUserPoint(userLockup.account as Address)
 
   userLockup.value = BigInt.fromI32(0)
+  userLockup.lockTime = BigInt.fromI32(0)
   userLockup.slope = point.value1
   userLockup.bias = point.value0
   userLockup.ts = point.value2
@@ -94,6 +95,7 @@ export function resetUserLockup(event: Ejected): UserLockup {
   let point = contract.getLastUserPoint(userLockup.account as Address)
 
   userLockup.value = BigInt.fromI32(0)
+  userLockup.lockTime = BigInt.fromI32(0)
   userLockup.slope = point.value1
   userLockup.bias = point.value0
   userLockup.ts = point.value2
