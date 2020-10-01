@@ -17,6 +17,8 @@ type UserLockup @entity {
   bias: BigInt!
 
   ejected: Boolean!
+
+  ejectedHash: Bytes
 }
 
 type Token @entity {

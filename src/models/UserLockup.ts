@@ -98,6 +98,7 @@ export function resetUserLockup(event: Ejected): UserLockup {
   userLockup.bias = point.value0
   userLockup.ts = point.value2
   userLockup.ejected = true
+  userLockup.ejectedHash = event.transaction.hash
 
   userLockup.save()
 
