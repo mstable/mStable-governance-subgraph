@@ -31,6 +31,7 @@ export function getOrCreateUserLockup(
     entity.lockTime = BigInt.fromI32(0)
     entity.ts = BigInt.fromI32(0)
     entity.slope = BigInt.fromI32(0)
+    entity.ejected = false
 
     entity.save()
 
@@ -58,6 +59,7 @@ export function depositUserLockup(event: Deposit): UserLockup {
   userLockup.slope = point.value1
   userLockup.bias = point.value0
   userLockup.ts = point.value2
+  userLockup.ejected = false
 
   userLockup.save()
 
@@ -75,6 +77,7 @@ export function withdrawUserLockup(event: Withdraw): UserLockup {
   userLockup.slope = point.value1
   userLockup.bias = point.value0
   userLockup.ts = point.value2
+  userLockup.ejected = false
 
   userLockup.save()
 
@@ -94,6 +97,7 @@ export function resetUserLockup(event: Ejected): UserLockup {
   userLockup.slope = point.value1
   userLockup.bias = point.value0
   userLockup.ts = point.value2
+  userLockup.ejected = true
 
   userLockup.save()
 
